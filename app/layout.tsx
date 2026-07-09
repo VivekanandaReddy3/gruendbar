@@ -1,55 +1,38 @@
-import type { Metadata } from "next";
-import localFont from 'next/font/local';
+import type { Metadata, Viewport } from "next";
+import { JetBrains_Mono, Newsreader, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
-import 'easymde/dist/easymde.min.css';
 
+const grotesk = Schibsted_Grotesk({
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--font-grotesk",
+});
 
-const workSans = localFont({
-  src : [
-    {
-      path: './fonts/WorkSans-Black.ttf',
-      weight: '900',
-      style: 'normal'
-    },{
-      path: './fonts/WorkSans-ExtraBold.ttf',
-      weight: '800',
-      style: 'normal'
-    },{
-      path: './fonts/WorkSans-Bold.ttf',
-      weight: '700',
-      style: 'normal'
-    },{
-      path: './fonts/WorkSans-SemiBold.ttf',
-      weight: '600',
-      style: 'normal'
-    },{
-      path: './fonts/WorkSans-Medium.ttf',
-      weight: '500',
-      style: 'normal'
-    },{
-      path: './fonts/WorkSans-Regular.ttf',
-      weight: '400',
-      style: 'normal'
-    },{
-      path: './fonts/WorkSans-Light.ttf',
-      weight: '300',
-      style: 'normal'
-    },{
-      path: './fonts/WorkSans-Thin.ttf',
-      weight: '200',
-      style: 'normal'
-    },{
-      path: './fonts/WorkSans-ExtraLight.ttf',
-      weight: '100',
-      style: 'normal'
-    },
-  ],
-  variable: '--font-work-sans'
-})
+const newsreader = Newsreader({
+  display: "swap",
+  style: "italic",
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+});
+
+const jetbrains = JetBrains_Mono({
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+});
 
 export const metadata: Metadata = {
-  title: "StartUp Directory",
-  description: "Pitch, Vote and Grow your startups",
+  title: {
+    default: "Gründbar — pitch your idea, find your people",
+    template: "%s — Gründbar",
+  },
+  description:
+    "Gründbar is a directory for startup ideas: pitch yours, upvote the good ones, and team up with founders looking for co-founders, engineers and designers.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#fafdf9",
 };
 
 export default function RootLayout({
@@ -60,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={workSans.variable}
+        className={`${grotesk.variable} ${newsreader.variable} ${jetbrains.variable} flex min-h-screen flex-col`}
       >
         {children}
       </body>

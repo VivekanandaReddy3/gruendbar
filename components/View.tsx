@@ -1,25 +1,30 @@
-import { client } from "@/sanity/lib/client"
-import Ping from "./Ping"
-import { STARTUP_VIEWS_QUERY } from "@/sanity/lib/queries"
+import { after } from "next/server";
+import { Eye } from "lucide-react";
 
-const View = async ({id}:{id:string}) => {
-    const result = await client.withConfig({useCdn: false}).fetch(STARTUP_VIEWS_QUERY, {id});
-    const totalViews = result?.views || 0;
+import { client } from "@/sanity/lib/client";
+import { STARTUP_VIEWS_QUERY } from "@/sanity/lib/queries";
+import { incrementViews } from "@/lib/actions";
 
+/**
+ * Shows the live view count and — after the response has been sent —
+ * increments it, so counting never blocks rendering.
+ */
+const View = async ({ id }: { id: string }) => {
+  const result = await client
+    .withConfig({ useCdn: false })
+    .fetch(STARTUP_VIEWS_QUERY, { id });
+  const totalViews = result?.views ?? 0;
 
-    //TODO: Update the number of Views
-  return <div className="view-container">
-    <div className="absolute -top-2 -right-2">
-        <Ping/>
-    </div>
+  after(async () => {
+    await incrementViews(id);
+  });
 
-    <p className="view-text">
-        <span className="font-black">
-            {totalViews} {totalViews === 1 ? 'View' : 'Views'}
-        </span>
-    </p>
+  return (
+    <span className="flex items-center gap-1">
+      <Eye className="size-3.5" />
+      {totalViews} {totalViews === 1 ? "view" : "views"}
+    </span>
+  );
+};
 
-  </div>
-}
-
-export default View
+export default View;

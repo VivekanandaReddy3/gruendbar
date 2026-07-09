@@ -1,23 +1,15 @@
 export const apiVersion =
-  process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2025-05-30'
+  process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-05-30";
 
-export const dataset = assertValue(
-  process.env.NEXT_PUBLIC_SANITY_DATASET,
-  'Missing environment variable: NEXT_PUBLIC_SANITY_DATASET'
-)
+export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
-export const projectId = assertValue(
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID'
-)
-
+// Falls back to a placeholder so the app builds and renders empty states
+// before a Sanity project is connected. See README → Setup.
+export const projectId =
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "placeholder";
 
 export const token = process.env.SANITY_WRITE_TOKEN;
 
-function assertValue<T>(v: T | undefined, errorMessage: string): T {
-  if (v === undefined) {
-    throw new Error(errorMessage)
-  }
-
-  return v
-}
+export const isSanityConfigured = Boolean(
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+);

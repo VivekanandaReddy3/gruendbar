@@ -1,125 +1,58 @@
+# gründbar.
 
-# 🚀 SU Directory
+**Pitch your idea. Find your people.**
 
-**SU Directory** is a dynamic startup directory platform that empowers entrepreneurs to connect, explore innovative startups, and pitch their own ventures. Built with a modern tech stack including **Next.js**, **NextAuth.js**, **Sanity CMS**, and **TypeScript**, this platform delivers a seamless, secure, and interactive experience for the startup community.
+Gründbar (German: *gründbar* ≈ "foundable") is a startup idea directory:
+founders pitch ideas in Markdown, the community upvotes the good ones, and
+anyone looking for a co-founder, engineer or designer can flag it — and get
+found through the team-up filter.
 
-## 🌟 Features
+**Live:** [gruendbar.vivekreddy.de](https://gruendbar.vivekreddy.de) ·
+a project by [Vivekananda Reddy](https://vivekreddy.de)
 
-- 🔍 **Explore Startups**: Browse a curated list of startups with detailed profiles, including mission, team, and funding details.
-- 💡 **Pitch Your Startup**: Entrepreneurs can submit and showcase their ventures with rich media and customizable profiles.
-- 🧑‍🤝‍🧑 **Connect with Founders**: Network and interact with fellow entrepreneurs through messaging and collaboration tools.
-- 🔐 **Authentication**: Secure sign-in and user session management powered by NextAuth.js, supporting OAuth and credentials-based login.
-- 📖 **CMS Integration**: Sanity CMS provides flexible, scalable content management for startup profiles and platform content.
-- ⚡ **Blazing Fast**: Optimized for performance with Next.js server-side rendering (SSR) and TypeScript for type-safe development.
-- 🎨 **Responsive Design**: Built with Tailwind CSS for a modern, responsive, and user-friendly interface.
+## Features
 
-## 🛠️ Tech Stack
+- **Pitch creation** — Markdown editor with live preview, validated server
+  actions, slug generation
+- **Upvotes** — one vote per signed-in founder, optimistic UI, sortable
+- **Team-up flags** — founders mark the roles they're looking for; visitors
+  filter the directory by "looking for teammates" and reach out via GitHub
+- **Founder profiles** — GitHub sign-in automatically becomes a founder page
+  listing your pitches
+- **Live directory** — full-text search, category chips, three sort orders,
+  view counts incremented after the response via `next/server`'s `after()`
+- **Graceful empty states** — the app builds and runs before any backend is
+  connected
 
-| Technology     | Description                              |
-|----------------|------------------------------------------|
-| Next.js        | React framework for SSR & performance    |
-| TypeScript     | Type-safe JavaScript                     |
-| NextAuth.js    | Authentication & session management      |
-| Sanity CMS     | Headless CMS for content management      |
-| Tailwind CSS   | Utility-first CSS framework for styling  |
+## Stack
 
-## 📦 Getting Started
+Next.js 15 (App Router, server actions) · React 19 · TypeScript ·
+Tailwind CSS 4 · Auth.js v5 (GitHub OAuth) · Sanity v3 (embedded Studio at
+`/studio`, Live Content API) · markdown-it
 
-### Prerequisites
+## Setup
 
-- **Node.js**: v16 or higher
-- **npm** or **yarn**: Package manager for dependencies
-- **Git**: For cloning the repository
-- **Sanity Account**: For CMS integration (create an account at [sanity.io](https://www.sanity.io))
-- **Environment Variables**: API keys and credentials for NextAuth.js and Sanity CMS
+```bash
+cp .env.example .env.local   # fill in the values (see comments inside)
+npm install
+npm run dev
+```
 
-### Installation
+You need two free accounts:
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/VivekanandaReddy3/SU_Directory
-   cd SU_Directory
-   ```
+1. **Sanity** — create a project at [sanity.io/manage](https://www.sanity.io/manage),
+   copy the project ID, and create an API token with Editor permissions.
+2. **GitHub OAuth app** — [github.com/settings/developers](https://github.com/settings/developers),
+   callback URL `http://localhost:3000/api/auth/callback/github`.
 
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
+Without env vars the app still builds and shows a "backend not connected"
+empty state — useful for previewing the UI.
 
+## Provenance
 
-3. **Configure Environment Variables**:
-   - Create a `.env.local` file in the project root.
-   - Add the required environment variables. Example:
-     ```env
-     NEXTAUTH_URL=http://localhost:3000
-     NEXTAUTH_SECRET=your_nextauth_secret
-     SANITY_PROJECT_ID=your_sanity_project_id
-     SANITY_DATASET=production
-     SANITY_API_TOKEN=your_sanity_api_token
-     ```
-   - Refer to [NextAuth.js documentation](https://next-auth.js.org/) and [Sanity documentation](https://www.sanity.io/docs) for generating these credentials.
-
-4. **Set Up Sanity CMS**:
-   - Navigate to the Sanity project folder (if separate, e.g., `/sanity`):
-     ```bash
-     cd sanity
-     npm install
-     ```
-   - Deploy the Sanity Studio:
-     ```bash
-     sanity deploy
-     ```
-
-5. **Run the Application**:
-   ```bash
-   npm run dev
-   ```
-
-
-6. **Access SU Directory**:
-   - Open your browser and navigate to `http://localhost:3000`.
-   - Access the Sanity Studio (if deployed locally) at `http://localhost:3000/studio` or the deployed URL.
-
-## 🖥️ Usage
-
-1. **Sign In**: Use NextAuth.js to log in with supported providers (e.g., Google, GitHub, or credentials).
-2. **Explore Startups**: Browse the directory to view startup profiles and filter by industry, location, or funding stage.
-3. **Pitch Your Startup**: Submit your venture via the profile creation form, accessible after authentication.
-4. **Manage Content**: Use Sanity Studio to update startup profiles, blog posts, or other dynamic content.
-5. **Network**: Connect with founders through the platform’s messaging or collaboration features.
-
-For detailed instructions, refer to the [documentation](#) (to be added).
-
-## 🤝 Contributing
-
-We welcome contributions to make **SU Directory** even better! To contribute:
-
-1. Fork the repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Make your changes and commit them:
-   ```bash
-   git commit -m "Add your feature description"
-   ```
-4. Push to your fork:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. Create a pull request on GitHub.
-
-Please ensure your code adheres to our [coding guidelines](#) (to be added) and includes relevant tests.
-
-## 📜 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## 📬 Contact
-
-For questions, feedback, or support, please reach out to:
-
-- **Author**: Vivekananda Reddy
-- **GitHub**: [VivekanandaReddy3](https://github.com/VivekanandaReddy3)
-
-
+This project started from the JavaScript Mastery "YC Directory" tutorial as
+a learning base. It has since been rebuilt into a different product: complete
+redesign and rebrand, the entire pitch-creation flow, upvotes, team-up flags
+and filtering, founder profiles, author↔GitHub account linking, view
+counting, the empty-state architecture, and the OG/favicon pipeline are
+original work on top of that base.
