@@ -2,83 +2,106 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --paper: #fafdf9;
-  --ink: #10160f;
+  --cream: #f4f0e4;
+  --card: #fdfbf3;
+  --forest: #0c2e25;
+  --lime: #c8f04b;
+  --meadow: #157a52;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-ink: var(--ink);
-  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-newsreader), Georgia, serif;
+  --color-cream: var(--cream);
+  --color-card: var(--card);
+  --color-forest: var(--forest);
+  --color-lime: var(--lime);
+  --color-meadow: var(--meadow);
+  --font-display: var(--font-anton), Impact, sans-serif;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-mono:
-    var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+    var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* Wide column for the directory grid. */
 @utility container-page {
   margin-inline: auto;
   width: 100%;
-  max-width: 72rem;
+  max-width: 76rem;
   padding-inline: 1.5rem;
 }
 
-/* Narrow column for reading pages (pitch detail, create form). */
 @utility container-narrow {
   margin-inline: auto;
   width: 100%;
-  max-width: 44rem;
+  max-width: 46rem;
   padding-inline: 1.5rem;
 }
 
+/* The registry's hard offset shadows — no blur, like print. */
 @layer utilities {
-  .shadow-card {
-    box-shadow:
-      0 1px 2px rgba(16, 22, 15, 0.04),
-      0 4px 12px rgba(16, 22, 15, 0.04);
+  .shadow-hard {
+    box-shadow: 4px 4px 0 0 var(--forest);
   }
-  .shadow-card-hover {
-    box-shadow:
-      0 2px 4px rgba(16, 22, 15, 0.05),
-      0 12px 32px rgba(16, 22, 15, 0.1);
+  .shadow-hard-sm {
+    box-shadow: 3px 3px 0 0 var(--forest);
+  }
+  .shadow-hard-lg {
+    box-shadow: 7px 7px 0 0 var(--forest);
+  }
+  /* Lift onto the shadow on hover, press into it on click. */
+  .hover-lift {
+    transition:
+      transform 0.15s ease-out,
+      box-shadow 0.15s ease-out;
+  }
+  .hover-lift:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--forest);
+  }
+  .hover-lift:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 var(--forest);
+  }
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
   }
 }
 
-/* Staggered entrance — set `--stagger: n` inline to offset the delay. */
+/* Snappy entrance — print doesn't blur. */
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateY(14px);
-    filter: blur(3px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 
 .reveal {
-  animation: reveal 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
-  animation-delay: calc(var(--stagger, 0) * 80ms);
+  animation: reveal 0.45s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  animation-delay: calc(var(--stagger, 0) * 60ms);
 }
 
-/* Animated underline for inline links and nav items. */
-.link-underline {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0% 1px;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  transition: background-size 0.3s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+/* Category marquee strip. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-.link-underline:hover,
-.link-underline[data-active="true"] {
-  background-size: 100% 1px;
+.marquee-track {
+  animation: marquee 28s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
+    animation: none;
+  }
+  .marquee-track {
     animation: none;
   }
   *,
@@ -90,14 +113,13 @@
 }
 
 ::selection {
-  background: #065f46;
-  color: #fafdf9;
+  background: var(--lime);
+  color: var(--forest);
 }
 
 :focus-visible {
-  outline: 2px solid #065f46;
-  outline-offset: 3px;
-  border-radius: 2px;
+  outline: 3px solid var(--meadow);
+  outline-offset: 2px;
 }
 
 html {
@@ -111,8 +133,8 @@ h3 {
 }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--cream);
+  color: var(--forest);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

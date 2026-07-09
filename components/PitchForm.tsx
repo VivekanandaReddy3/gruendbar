@@ -13,10 +13,10 @@ const md = markdownit();
 const initialState: CreatePitchState = { status: "IDLE", errors: {} };
 
 const labelClass =
-  "font-mono text-[11px] uppercase tracking-[0.18em] text-slate-500";
+  "font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-forest";
 const inputClass =
-  "mt-2 w-full rounded-xl border border-emerald-950/15 bg-white px-4 py-2.5 text-sm shadow-card outline-none transition-shadow placeholder:text-slate-400 focus:shadow-card-hover";
-const errorClass = "mt-1.5 font-mono text-[11px] text-red-600";
+  "mt-2 w-full border-2 border-forest bg-card px-4 py-2.5 text-sm text-forest outline-none transition-shadow placeholder:text-forest/40 focus:shadow-hard-sm";
+const errorClass = "mt-1.5 font-mono text-[11px] font-semibold text-red-700";
 
 const PitchForm = () => {
   const router = useRouter();
@@ -125,7 +125,7 @@ const PitchForm = () => {
           {LOOKING_FOR_ROLES.map((role) => (
             <label
               key={role}
-              className="group cursor-pointer rounded-full border border-emerald-950/15 px-3.5 py-1.5 font-mono text-[11px] text-slate-600 transition-colors select-none hover:border-emerald-600 has-[:checked]:border-emerald-600 has-[:checked]:bg-emerald-600 has-[:checked]:text-white"
+              className="cursor-pointer border-2 border-forest bg-card px-3.5 py-1.5 font-mono text-[11px] font-semibold tracking-wide text-forest uppercase transition-colors select-none hover:bg-lime/50 has-[:checked]:bg-lime"
             >
               <input
                 type="checkbox"
@@ -133,12 +133,12 @@ const PitchForm = () => {
                 value={role}
                 className="sr-only"
               />
-              + {role}
+              ✚ {role}
             </label>
           ))}
         </div>
-        <p className="mt-2 font-serif text-sm text-slate-400 italic">
-          optional — pitches looking for teammates get a badge and a filter.
+        <p className="mt-2 font-mono text-[11px] text-forest/50">
+          Optional — pitches looking for teammates get a badge and a filter.
         </p>
       </fieldset>
 
@@ -147,17 +147,17 @@ const PitchForm = () => {
           <label htmlFor="pitch" className={labelClass}>
             The pitch
           </label>
-          <div className="flex gap-1 font-mono text-[11px]">
+          <div className="flex border-2 border-forest font-mono text-[11px] font-semibold uppercase">
             {(["write", "preview"] as const).map((mode) => (
               <button
                 key={mode}
                 type="button"
                 onClick={() => setTab(mode)}
                 className={clsx(
-                  "cursor-pointer rounded-full px-3 py-1 transition-colors",
+                  "cursor-pointer px-3 py-1 transition-colors",
                   tab === mode
-                    ? "bg-ink text-paper"
-                    : "text-slate-400 hover:text-slate-700"
+                    ? "bg-forest text-cream"
+                    : "bg-card text-forest/60 hover:text-forest"
                 )}
               >
                 {mode}
@@ -183,7 +183,7 @@ const PitchForm = () => {
           <>
             <input type="hidden" name="pitch" value={pitch} />
             <div
-              className="prose prose-slate mt-2 min-h-[19rem] max-w-none rounded-xl border border-emerald-950/15 bg-white px-5 py-4 shadow-card prose-headings:font-semibold"
+              className="prose mt-2 min-h-[19rem] max-w-none border-2 border-forest bg-card px-5 py-4 prose-headings:text-forest prose-p:text-forest/80"
               dangerouslySetInnerHTML={{ __html: preview }}
             />
           </>
@@ -194,7 +194,7 @@ const PitchForm = () => {
       </div>
 
       {state.errors.form && (
-        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 font-mono text-xs text-red-700">
+        <p className="border-2 border-red-700 bg-red-50 px-4 py-3 font-mono text-xs font-semibold text-red-700">
           {state.errors.form}
         </p>
       )}
@@ -202,9 +202,9 @@ const PitchForm = () => {
       <button
         type="submit"
         disabled={isPending}
-        className="cursor-pointer self-start rounded-full bg-ink px-8 py-3 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover disabled:opacity-60"
+        className="hover-lift shadow-hard cursor-pointer self-start border-2 border-forest bg-lime px-8 py-3 font-mono text-sm font-semibold tracking-wide text-forest uppercase disabled:opacity-60"
       >
-        {isPending ? "Publishing…" : "Publish pitch →"}
+        {isPending ? "Filing…" : "File the pitch →"}
       </button>
     </form>
   );

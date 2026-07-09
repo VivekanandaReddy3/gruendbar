@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Users } from "lucide-react";
 import { clsx } from "clsx";
 
 import { CATEGORIES, SORT_OPTIONS, type SortValue } from "@/lib/constants";
@@ -11,7 +10,10 @@ export interface DirectoryFilters {
   sort: SortValue;
 }
 
-const buildHref = (filters: DirectoryFilters, patch: Partial<DirectoryFilters>) => {
+const buildHref = (
+  filters: DirectoryFilters,
+  patch: Partial<DirectoryFilters>
+) => {
   const next = { ...filters, ...patch };
   const params = new URLSearchParams();
   if (next.query) params.set("query", next.query);
@@ -22,74 +24,69 @@ const buildHref = (filters: DirectoryFilters, patch: Partial<DirectoryFilters>) 
   return qs ? `/?${qs}` : "/";
 };
 
+const chipClass = (active: boolean) =>
+  clsx(
+    "border-2 border-forest px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide transition-colors",
+    active ? "bg-forest text-cream" : "bg-card text-forest hover:bg-lime"
+  );
+
 const FilterBar = ({ filters }: { filters: DirectoryFilters }) => {
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-wrap gap-2">
         <Link
           href={buildHref(filters, { category: undefined })}
-          data-active={!filters.category}
-          className={clsx(
-            "rounded-full border px-3 py-1 font-mono text-[11px] transition-colors",
-            !filters.category
-              ? "border-ink bg-ink text-paper"
-              : "border-emerald-950/10 text-slate-500 hover:border-emerald-600 hover:text-emerald-700"
-          )}
+          className={chipClass(!filters.category)}
         >
           All
         </Link>
         {CATEGORIES.map((category) => {
-          const active = filters.category?.toLowerCase() === category.toLowerCase();
+          const active =
+            filters.category?.toLowerCase() === category.toLowerCase();
           return (
             <Link
               key={category}
-              href={buildHref(filters, { category: active ? undefined : category })}
-              className={clsx(
-                "rounded-full border px-3 py-1 font-mono text-[11px] transition-colors",
-                active
-                  ? "border-ink bg-ink text-paper"
-                  : "border-emerald-950/10 text-slate-500 hover:border-emerald-600 hover:text-emerald-700"
-              )}
+              href={buildHref(filters, {
+                category: active ? undefined : category,
+              })}
+              className={chipClass(active)}
             >
               {category}
             </Link>
           );
         })}
-      </div>
-
-      <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
           href={buildHref(filters, { team: !filters.team })}
           className={clsx(
-            "flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-[11px] transition-colors",
+            "border-2 border-forest px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide transition-colors",
             filters.team
-              ? "border-emerald-600 bg-emerald-600 text-white"
-              : "border-emerald-950/10 text-slate-500 hover:border-emerald-600 hover:text-emerald-700"
+              ? "bg-lime text-forest"
+              : "bg-card text-forest hover:bg-lime"
           )}
         >
-          <Users className="size-3.5" />
-          Looking for teammates
+          ✚ Looking for teammates
         </Link>
+      </div>
 
-        <div className="flex items-center gap-1 font-mono text-[11px] text-slate-400">
-          <span className="mr-1">sort:</span>
-          {SORT_OPTIONS.map((option) => {
-            const active = filters.sort === option.value;
-            return (
-              <Link
-                key={option.value}
-                href={buildHref(filters, { sort: option.value })}
-                data-active={active}
-                className={clsx(
-                  "link-underline px-1 transition-colors",
-                  active ? "text-ink" : "hover:text-slate-700"
-                )}
-              >
-                {option.label}
-              </Link>
-            );
-          })}
-        </div>
+      <div className="flex items-center gap-3 font-mono text-[11px] text-forest/50 uppercase">
+        <span className="tracking-widest">Sort</span>
+        {SORT_OPTIONS.map((option) => {
+          const active = filters.sort === option.value;
+          return (
+            <Link
+              key={option.value}
+              href={buildHref(filters, { sort: option.value })}
+              className={clsx(
+                "underline-offset-4 transition-colors",
+                active
+                  ? "font-semibold text-forest underline decoration-lime decoration-4"
+                  : "hover:text-forest"
+              )}
+            >
+              {option.label}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

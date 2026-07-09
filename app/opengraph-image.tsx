@@ -5,15 +5,14 @@ export const alt = "Gründbar — pitch your idea, find your people";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const TITLE = "Pitch your idea. Find your people.";
-const TAGLINE = "because good ideas are gründbar — foundable.";
-const MONO = "gründbar. THE STARTUP IDEA DIRECTORY a project by vivekreddy.de";
+const TITLE = "PITCH YOUR IDEA. FIND YOUR PEOPLE.";
+const MONO =
+  "GRÜNDBAR. THE STARTUP IDEA REGISTRY a project by vivekreddy.de good ideas are foundable";
 
 export default async function Image() {
-  const [grotesk, serif, mono] = await Promise.all([
-    loadGoogleFont("Schibsted+Grotesk:wght@700", TITLE + "gründbar."),
-    loadGoogleFont("Newsreader:ital,wght@1,500", TAGLINE),
-    loadGoogleFont("JetBrains+Mono:wght@500", MONO),
+  const [anton, mono] = await Promise.all([
+    loadGoogleFont("Anton", TITLE + "GRÜNDBAR."),
+    loadGoogleFont("IBM+Plex+Mono:wght@500", MONO),
   ]);
 
   return new ImageResponse(
@@ -25,8 +24,9 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: 72,
-          background: "#fafdf9",
+          padding: 64,
+          background: "#f4f0e4",
+          border: "16px solid #0c2e25",
         }}
       >
         <div
@@ -38,83 +38,71 @@ export default async function Image() {
         >
           <div
             style={{
-              fontFamily: "Grotesk",
-              fontSize: 34,
-              color: "#10160f",
-              display: "flex",
+              fontFamily: "Anton",
+              fontSize: 40,
+              color: "#0c2e25",
             }}
           >
-            gründbar<span style={{ color: "#059669" }}>.</span>
+            GRÜNDBAR.
           </div>
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 14,
-              fontFamily: "JetBrains Mono",
+              fontFamily: "IBM Plex Mono",
               fontSize: 19,
               letterSpacing: 4,
-              color: "#64748b",
+              color: "#0c2e25",
+              background: "#c8f04b",
+              border: "3px solid #0c2e25",
+              padding: "8px 16px",
             }}
           >
-            <div
-              style={{
-                width: 12,
-                height: 12,
-                borderRadius: 9999,
-                background: "#10b981",
-              }}
-            />
-            THE STARTUP IDEA DIRECTORY
+            THE STARTUP IDEA REGISTRY
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
+        <div
+          style={{
+            fontFamily: "Anton",
+            fontSize: 110,
+            lineHeight: 0.98,
+            color: "#0c2e25",
+            maxWidth: 1000,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <span>PITCH YOUR</span>
+          <span
             style={{
-              fontFamily: "Grotesk",
-              fontSize: 84,
-              letterSpacing: -3,
-              color: "#10160f",
-              lineHeight: 1.05,
-              maxWidth: 950,
+              background: "#c8f04b",
+              alignSelf: "flex-start",
+              padding: "0 16px",
             }}
           >
-            {TITLE}
-          </div>
-          <div
-            style={{
-              fontFamily: "Newsreader",
-              fontStyle: "italic",
-              fontSize: 38,
-              color: "#64748b",
-              marginTop: 18,
-            }}
-          >
-            {TAGLINE}
-          </div>
+            IDEA.
+          </span>
+          <span>FIND YOUR PEOPLE.</span>
         </div>
 
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
-            fontFamily: "JetBrains Mono",
+            fontFamily: "IBM Plex Mono",
             fontSize: 21,
-            color: "#94a3b8",
+            color: "#0c2e25",
           }}
         >
+          <div>good ideas are foundable</div>
           <div>a project by vivekreddy.de</div>
-          <div style={{ color: "#059669" }}>gründbar.</div>
         </div>
       </div>
     ),
     {
       ...size,
       fonts: [
-        { name: "Grotesk", data: grotesk, weight: 700, style: "normal" },
-        { name: "Newsreader", data: serif, weight: 500, style: "italic" },
-        { name: "JetBrains Mono", data: mono, weight: 500, style: "normal" },
+        { name: "Anton", data: anton, weight: 400, style: "normal" },
+        { name: "IBM Plex Mono", data: mono, weight: 500, style: "normal" },
       ],
     }
   );

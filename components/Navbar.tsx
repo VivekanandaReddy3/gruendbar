@@ -7,21 +7,21 @@ const Navbar = async () => {
   const authorId = (session as { authorId?: string } | null)?.authorId;
 
   return (
-    <header className="sticky top-0 z-50 bg-[#fafdf9]/80 backdrop-blur-md">
-      <div className="container-page flex items-center justify-between py-4">
+    <header className="sticky top-0 z-50 border-b-2 border-forest bg-cream">
+      <div className="container-page flex items-center justify-between py-3">
         <Link
           href="/"
-          className="text-lg font-bold tracking-tight text-ink"
+          className="font-display text-2xl tracking-wide text-forest uppercase"
         >
-          gründbar<span className="text-emerald-600">.</span>
+          Gründbar<span className="text-meadow">.</span>
         </Link>
 
-        <nav className="flex items-center gap-4 md:gap-5">
+        <nav className="flex items-center gap-3 md:gap-4">
           {session?.user ? (
             <>
               <Link
                 href="/create"
-                className="rounded-full bg-ink px-5 py-2 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover"
+                className="hover-lift shadow-hard-sm border-2 border-forest bg-lime px-4 py-1.5 font-mono text-xs font-semibold tracking-wide text-forest uppercase"
               >
                 Start a pitch
               </Link>
@@ -29,19 +29,19 @@ const Navbar = async () => {
               {authorId && (
                 <Link
                   href={`/founder/${authorId}`}
-                  className="flex items-center gap-2"
-                  title="Your profile"
+                  className="hover-lift shadow-hard-sm border-2 border-forest"
+                  title="Your founder page"
                 >
                   {session.user.image ? (
                     <Image
                       src={session.user.image}
                       alt={session.user.name ?? "Your avatar"}
-                      width={30}
-                      height={30}
-                      className="rounded-full border border-emerald-950/10"
+                      width={32}
+                      height={32}
+                      className="block"
                     />
                   ) : (
-                    <span className="flex size-[30px] items-center justify-center rounded-full bg-emerald-100 font-mono text-xs text-emerald-900">
+                    <span className="flex size-8 items-center justify-center bg-forest font-mono text-xs text-cream">
                       {(session.user.name ?? "?").charAt(0)}
                     </span>
                   )}
@@ -56,9 +56,9 @@ const Navbar = async () => {
               >
                 <button
                   type="submit"
-                  className="link-underline cursor-pointer font-mono text-xs text-slate-500 transition-colors hover:text-slate-950"
+                  className="cursor-pointer font-mono text-xs text-forest/60 underline decoration-2 underline-offset-4 transition-colors hover:text-forest"
                 >
-                  Sign out
+                  sign out
                 </button>
               </form>
             </>
@@ -71,7 +71,7 @@ const Navbar = async () => {
             >
               <button
                 type="submit"
-                className="cursor-pointer rounded-full bg-ink px-5 py-2 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover"
+                className="hover-lift shadow-hard-sm cursor-pointer border-2 border-forest bg-lime px-4 py-1.5 font-mono text-xs font-semibold tracking-wide text-forest uppercase"
               >
                 Sign in with GitHub
               </button>

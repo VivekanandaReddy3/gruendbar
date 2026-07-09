@@ -1,25 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Newsreader, Schibsted_Grotesk } from "next/font/google";
+import { Anton, Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const grotesk = Schibsted_Grotesk({
+const anton = Anton({
   display: "swap",
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-grotesk",
+  variable: "--font-anton",
 });
 
-const newsreader = Newsreader({
+const archivo = Archivo({
   display: "swap",
-  style: "italic",
-  weight: ["400", "500"],
   subsets: ["latin"],
-  variable: "--font-newsreader",
+  variable: "--font-archivo",
 });
 
-const jetbrains = JetBrains_Mono({
+const plexMono = IBM_Plex_Mono({
   display: "swap",
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
-  variable: "--font-jetbrains",
+  variable: "--font-plex-mono",
 });
 
 export const metadata: Metadata = {
@@ -28,11 +28,11 @@ export const metadata: Metadata = {
     template: "%s — Gründbar",
   },
   description:
-    "Gründbar is a directory for startup ideas: pitch yours, upvote the good ones, and team up with founders looking for co-founders, engineers and designers.",
+    "Gründbar is a registry for startup ideas: pitch yours, upvote the good ones, and team up with founders looking for co-founders, engineers and designers.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fafdf9",
+  themeColor: "#f4f0e4",
 };
 
 export default function RootLayout({
@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${grotesk.variable} ${newsreader.variable} ${jetbrains.variable} flex min-h-screen flex-col`}
+        className={`${anton.variable} ${archivo.variable} ${plexMono.variable} flex min-h-screen flex-col`}
       >
         {children}
       </body>
