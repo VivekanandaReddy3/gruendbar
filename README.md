@@ -48,6 +48,17 @@ You need two free accounts:
 Without env vars the app still builds and shows a "backend not connected"
 empty state — useful for previewing the UI.
 
+### Demo content
+
+```bash
+node scripts/seed.mjs
+```
+
+Seeds the directory with example pitches. Demo personas use Germany's
+placeholder-name convention (Max Mustermann & friends) and say so in their
+bios — no fake users pretending to be real ones. Idempotent; edit
+`OWNER_ID` in the script if your author id differs.
+
 ## Provenance
 
 This project started from the JavaScript Mastery "YC Directory" tutorial as
