@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowBigUp, Eye, Users } from "lucide-react";
 
 import { formatDate } from "@/lib/utils";
 import type { StartupItem } from "@/lib/types";
@@ -28,65 +29,73 @@ const StartupCard = ({
 
   return (
     <li
-      className="reveal shadow-hard hover-lift flex h-full flex-col border-2 border-forest bg-card"
+      className="reveal group flex h-full flex-col rounded-2xl border border-emerald-950/10 bg-white p-3 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
       style={{ "--stagger": stagger } as React.CSSProperties}
     >
-      <Link href={`/startup/${_id}`} className="relative block border-b-2 border-forest">
-        <div className="aspect-[16/9] overflow-hidden bg-forest/10">
-          {image && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={image}
-              alt={title ?? "Startup cover"}
-              className="h-full w-full object-cover"
-            />
-          )}
-        </div>
-        <span className="font-display absolute top-0 left-0 border-r-2 border-b-2 border-forest bg-cream px-2.5 py-1 text-sm text-forest">
+      <Link
+        href={`/startup/${_id}`}
+        className="relative block aspect-[16/9] overflow-hidden rounded-lg bg-emerald-50"
+      >
+        {image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={image}
+            alt={title ?? "Startup cover"}
+            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+          />
+        )}
+        <span className="absolute top-2 left-2 rounded-md bg-white/90 px-2 py-0.5 font-mono text-[10px] font-medium text-emerald-900 backdrop-blur-sm">
           № {String(index + 1).padStart(2, "0")}
         </span>
         {lookingFor && lookingFor.length > 0 && (
-          <span className="absolute right-0 bottom-0 border-t-2 border-l-2 border-forest bg-lime px-2.5 py-1 font-mono text-[10px] font-semibold tracking-widest text-forest uppercase">
-            ✚ team-up
+          <span className="absolute right-2 bottom-2 flex items-center gap-1 rounded-md bg-emerald-700/95 px-2.5 py-1 font-mono text-[10px] tracking-wide text-white">
+            <Users className="size-3" />
+            team-up
           </span>
         )}
       </Link>
 
-      <div className="flex flex-1 flex-col p-4">
-        <p className="flex flex-wrap items-center gap-x-3 font-mono text-[11px] text-forest/50">
+      <div className="flex flex-1 flex-col px-1.5 pt-4 pb-1.5">
+        <p className="flex items-center gap-3 font-mono text-[11px] text-slate-400">
           <time dateTime={_createdAt}>{formatDate(_createdAt)}</time>
-          <span>{views ?? 0} views</span>
-          <span className="font-semibold text-meadow">▲ {upvotes ?? 0}</span>
+          <span className="flex items-center gap-1">
+            <Eye className="size-3.5" />
+            {views ?? 0}
+          </span>
+          <span className="flex items-center gap-1">
+            <ArrowBigUp className="size-3.5" />
+            {upvotes ?? 0}
+          </span>
         </p>
 
         <Link href={`/startup/${_id}`} className="mt-2">
-          <h3 className="font-display text-2xl leading-tight tracking-wide text-forest uppercase">
+          <h3 className="text-lg leading-snug font-bold tracking-tight text-ink">
             {title}
           </h3>
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-forest/70">
+          <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-slate-600">
             {description}
           </p>
         </Link>
 
-        <div className="mt-auto flex items-end justify-between gap-3 pt-5">
+        <div className="mt-auto flex items-center justify-between pt-4">
           <Link
             href={`/founder/${author?._id}`}
-            className="group flex min-w-0 items-center gap-2"
+            className="flex min-w-0 items-center gap-2"
           >
             {author?.image ? (
               <Image
                 src={author.image}
                 alt={author?.name ?? "Founder"}
-                width={26}
-                height={26}
-                className="border-2 border-forest"
+                width={24}
+                height={24}
+                className="rounded-full border border-emerald-950/10"
               />
             ) : (
-              <span className="flex size-[26px] items-center justify-center border-2 border-forest bg-forest font-mono text-[10px] text-cream">
+              <span className="flex size-6 items-center justify-center rounded-full bg-emerald-100 font-mono text-[10px] text-emerald-900">
                 {(author?.name ?? "?").charAt(0)}
               </span>
             )}
-            <span className="truncate font-mono text-xs text-forest/70 underline decoration-transparent decoration-2 underline-offset-4 transition-colors group-hover:decoration-lime">
+            <span className="link-underline truncate text-xs font-medium text-slate-600">
               {author?.name}
             </span>
           </Link>
@@ -94,7 +103,7 @@ const StartupCard = ({
           {category && (
             <Link
               href={`/?category=${encodeURIComponent(category)}`}
-              className="shrink-0 -rotate-2 border-2 border-forest bg-cream px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-forest uppercase transition-transform hover:rotate-0"
+              className="rounded-full border border-emerald-950/10 px-2.5 py-0.5 font-mono text-[10px] text-slate-500 transition-colors hover:border-emerald-600 hover:text-emerald-700"
             >
               {category}
             </Link>

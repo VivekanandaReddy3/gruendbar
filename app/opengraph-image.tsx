@@ -5,14 +5,15 @@ export const alt = "Gründbar — pitch your idea, find your people";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const TITLE = "PITCH YOUR IDEA. FIND YOUR PEOPLE.";
-const MONO =
-  "GRÜNDBAR. THE STARTUP IDEA REGISTRY a project by vivekreddy.de good ideas are foundable";
+const GROTESK_TEXT =
+  "Pitch your idea. Find your people. gründbar.";
+const MONO_TEXT =
+  "✳ THE STARTUP IDEA REGISTRY good ideas are foundable a project by vivekreddy.de";
 
 export default async function Image() {
-  const [anton, mono] = await Promise.all([
-    loadGoogleFont("Anton", TITLE + "GRÜNDBAR."),
-    loadGoogleFont("IBM+Plex+Mono:wght@500", MONO),
+  const [grotesk, mono] = await Promise.all([
+    loadGoogleFont("Schibsted+Grotesk:wght@700", GROTESK_TEXT),
+    loadGoogleFont("JetBrains+Mono:wght@500", MONO_TEXT),
   ]);
 
   return new ImageResponse(
@@ -24,9 +25,8 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: 64,
-          background: "#f4f0e4",
-          border: "16px solid #0c2e25",
+          padding: 72,
+          background: "#fafdf9",
         }}
       >
         <div
@@ -38,59 +38,64 @@ export default async function Image() {
         >
           <div
             style={{
-              fontFamily: "Anton",
-              fontSize: 40,
-              color: "#0c2e25",
+              fontFamily: "Grotesk",
+              fontSize: 36,
+              color: "#101613",
+              display: "flex",
             }}
           >
-            GRÜNDBAR.
+            gründbar<span style={{ color: "#059669" }}>.</span>
           </div>
           <div
             style={{
-              fontFamily: "IBM Plex Mono",
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              fontFamily: "JetBrains Mono",
               fontSize: 19,
               letterSpacing: 4,
-              color: "#0c2e25",
-              background: "#c8f04b",
-              border: "3px solid #0c2e25",
-              padding: "8px 16px",
+              color: "#64748b",
             }}
           >
+            <span style={{ color: "#059669", fontSize: 24 }}>✳</span>
             THE STARTUP IDEA REGISTRY
           </div>
         </div>
 
         <div
           style={{
-            fontFamily: "Anton",
-            fontSize: 110,
-            lineHeight: 0.98,
-            color: "#0c2e25",
-            maxWidth: 1000,
+            fontFamily: "Grotesk",
+            fontSize: 88,
+            letterSpacing: -3,
+            color: "#101613",
+            lineHeight: 1.08,
             display: "flex",
             flexDirection: "column",
+            maxWidth: 950,
           }}
         >
-          <span>PITCH YOUR</span>
-          <span
-            style={{
-              background: "#c8f04b",
-              alignSelf: "flex-start",
-              padding: "0 16px",
-            }}
-          >
-            IDEA.
-          </span>
-          <span>FIND YOUR PEOPLE.</span>
+          <div style={{ display: "flex" }}>
+            Pitch your&nbsp;
+            <span
+              style={{
+                backgroundImage:
+                  "linear-gradient(transparent 52%, #d9f99d 52%, #d9f99d 92%, transparent 92%)",
+                padding: "0 6px",
+              }}
+            >
+              idea.
+            </span>
+          </div>
+          <div>Find your people.</div>
         </div>
 
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
-            fontFamily: "IBM Plex Mono",
+            fontFamily: "JetBrains Mono",
             fontSize: 21,
-            color: "#0c2e25",
+            color: "#94a3b8",
           }}
         >
           <div>good ideas are foundable</div>
@@ -101,8 +106,8 @@ export default async function Image() {
     {
       ...size,
       fonts: [
-        { name: "Anton", data: anton, weight: 400, style: "normal" },
-        { name: "IBM Plex Mono", data: mono, weight: 500, style: "normal" },
+        { name: "Grotesk", data: grotesk, weight: 700, style: "normal" },
+        { name: "JetBrains Mono", data: mono, weight: 500, style: "normal" },
       ],
     }
   );

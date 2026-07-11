@@ -5,7 +5,7 @@ export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
 export default async function Icon() {
-  const anton = await loadGoogleFont("Anton", "G");
+  const grotesk = await loadGoogleFont("Schibsted+Grotesk:wght@700", "g");
 
   return new ImageResponse(
     (
@@ -16,18 +16,20 @@ export default async function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0c2e25",
-          color: "#c8f04b",
-          fontFamily: "Anton",
-          fontSize: 24,
+          background: "#065f46",
+          borderRadius: 7,
+          color: "#fafdf9",
+          fontFamily: "Grotesk",
+          fontSize: 22,
+          paddingBottom: 3,
         }}
       >
-        G
+        g
       </div>
     ),
     {
       ...size,
-      fonts: [{ name: "Anton", data: anton, weight: 400, style: "normal" }],
+      fonts: [{ name: "Grotesk", data: grotesk, weight: 700, style: "normal" }],
     }
   );
 }

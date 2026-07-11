@@ -7,26 +7,25 @@ export default function Layout({
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-10 pb-24 md:pt-14">{children}</main>
-      <footer className="border-t-2 border-forest bg-forest text-cream">
-        <div className="container-page flex flex-col gap-6 py-10">
-          <p className="font-display text-4xl tracking-wide uppercase md:text-6xl">
-            Gründbar<span className="text-lime">.</span>
-          </p>
-          <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-cream/70">
-            <span>good ideas are foundable — pitch yours.</span>
-            <span>
-              built by{" "}
-              <Link
-                href="https://vivekreddy.de"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lime underline decoration-2 underline-offset-4 transition-colors hover:text-cream"
-              >
-                Vivekananda Reddy
-              </Link>
-            </span>
-          </div>
+      <main className="flex-1 pt-10 pb-20 md:pt-14">{children}</main>
+      <footer className="container-page pb-8">
+        <hr className="mb-4 border-emerald-950/10" />
+        <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-slate-500">
+          <span>
+            gründbar<span className="text-emerald-600">.</span> — good ideas
+            are foundable
+          </span>
+          <span>
+            built by{" "}
+            <Link
+              href="https://vivekreddy.de"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline text-slate-700 transition-colors hover:text-slate-950"
+            >
+              Vivekananda Reddy
+            </Link>
+          </span>
         </div>
       </footer>
     </>

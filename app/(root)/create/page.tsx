@@ -13,21 +13,20 @@ export default async function CreatePage() {
   return (
     <section className="container-narrow">
       <p
-        className="reveal font-mono text-[11px] font-semibold tracking-[0.25em] text-meadow uppercase"
+        className="reveal mb-3 font-mono text-[11px] tracking-[0.2em] text-slate-400 uppercase"
         style={{ "--stagger": 0 } as React.CSSProperties}
       >
-        New entry
+        New pitch
       </p>
       <h1
-        className="reveal font-display mt-3 text-5xl leading-[0.95] tracking-wide text-forest uppercase md:text-6xl"
+        className="reveal text-4xl font-bold tracking-tight text-ink"
         style={{ "--stagger": 1 } as React.CSSProperties}
       >
-        File your{" "}
-        <span className="inline-block bg-lime px-2">pitch.</span>
+        Start a <span className="mark">pitch.</span>
       </h1>
       <p
-        className="reveal mt-4 text-forest/70"
-        style={{ "--stagger": 2 } as React.CSSProperties}
+        className="reveal mt-3 text-lg text-slate-600"
+        style={{ "--stagger": 1 } as React.CSSProperties}
       >
         One idea, one page, one team.
       </p>
@@ -35,19 +34,19 @@ export default async function CreatePage() {
       {session ? (
         <div
           className="reveal mt-10"
-          style={{ "--stagger": 3 } as React.CSSProperties}
+          style={{ "--stagger": 2 } as React.CSSProperties}
         >
           <PitchForm />
         </div>
       ) : (
         <div
-          className="reveal shadow-hard mt-10 border-2 border-forest bg-card px-6 py-14 text-center"
-          style={{ "--stagger": 3 } as React.CSSProperties}
+          className="reveal mt-10 rounded-2xl border border-dashed border-emerald-950/15 px-6 py-14 text-center"
+          style={{ "--stagger": 2 } as React.CSSProperties}
         >
-          <p className="font-display text-2xl text-forest uppercase">
+          <p className="text-lg font-medium text-ink">
             Pitching needs a founder behind it
           </p>
-          <p className="mt-2 font-mono text-xs text-forest/60">
+          <p className="mt-1 text-sm text-slate-500">
             Sign in with GitHub — your profile becomes your founder page.
           </p>
           <form
@@ -59,7 +58,7 @@ export default async function CreatePage() {
           >
             <button
               type="submit"
-              className="hover-lift shadow-hard cursor-pointer border-2 border-forest bg-lime px-6 py-2.5 font-mono text-xs font-semibold tracking-wide text-forest uppercase"
+              className="cursor-pointer rounded-lg bg-ink px-6 py-2.5 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover"
             >
               Sign in with GitHub
             </button>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import markdownit from "markdown-it";
+import { Users } from "lucide-react";
 
 import { safeAuth } from "@/auth";
 import { formatDate } from "@/lib/utils";
@@ -42,17 +43,20 @@ const StartupPage = async ({
     <article className="container-narrow">
       <Link
         href="/"
-        className="reveal inline-block font-mono text-xs font-semibold tracking-widest text-forest/60 uppercase underline decoration-2 underline-offset-4 transition-colors hover:text-forest"
+        className="group reveal mb-8 inline-block font-mono text-xs text-slate-500 transition-colors hover:text-slate-950"
         style={{ "--stagger": 0 } as React.CSSProperties}
       >
-        ← Back to the register
+        <span className="inline-block transition-transform duration-300 group-hover:-translate-x-1">
+          ←
+        </span>{" "}
+        Directory
       </Link>
 
       <header
-        className="reveal mt-6"
+        className="reveal"
         style={{ "--stagger": 1 } as React.CSSProperties}
       >
-        <p className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] text-forest/50">
+        <p className="flex flex-wrap items-center gap-3 font-mono text-xs text-slate-400">
           <time dateTime={post._createdAt}>{formatDate(post._createdAt)}</time>
           <Suspense fallback={<span>… views</span>}>
             <View id={id} />
@@ -60,18 +64,18 @@ const StartupPage = async ({
           {post.category && (
             <Link
               href={`/?category=${encodeURIComponent(post.category)}`}
-              className="border-2 border-forest bg-cream px-2 py-0.5 font-semibold tracking-wider text-forest uppercase transition-colors hover:bg-lime"
+              className="rounded-full border border-emerald-950/10 px-2.5 py-0.5 text-[10px] transition-colors hover:border-emerald-600 hover:text-emerald-700"
             >
               {post.category}
             </Link>
           )}
         </p>
 
-        <h1 className="font-display mt-4 text-5xl leading-[0.95] tracking-wide text-forest uppercase md:text-6xl">
+        <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink">
           {post.title}
         </h1>
         {post.description && (
-          <p className="mt-4 border-l-4 border-lime pl-4 text-lg text-forest/70">
+          <p className="mt-4 border-l-[3px] border-lime-300 pl-4 text-lg text-slate-600 md:text-xl">
             {post.description}
           </p>
         )}
@@ -91,19 +95,19 @@ const StartupPage = async ({
               alt={post.author?.name ?? "Founder"}
               width={44}
               height={44}
-              className="border-2 border-forest"
+              className="rounded-full border border-emerald-950/10"
             />
           ) : (
-            <span className="flex size-11 items-center justify-center border-2 border-forest bg-forest font-mono text-sm text-cream">
+            <span className="flex size-11 items-center justify-center rounded-full bg-emerald-100 font-mono text-sm text-emerald-900">
               {(post.author?.name ?? "?").charAt(0)}
             </span>
           )}
           <span>
-            <span className="block text-sm font-bold text-forest underline decoration-transparent decoration-2 underline-offset-4 transition-colors group-hover:decoration-lime">
+            <span className="link-underline block text-sm font-semibold text-ink">
               {post.author?.name}
             </span>
             {post.author?.username && (
-              <span className="font-mono text-xs text-forest/50">
+              <span className="font-mono text-xs text-slate-400">
                 @{post.author.username}
               </span>
             )}
@@ -120,40 +124,41 @@ const StartupPage = async ({
 
       {post.image && (
         <div
-          className="reveal shadow-hard mt-8 border-2 border-forest"
+          className="reveal mt-8 overflow-hidden rounded-2xl border border-emerald-950/10 bg-emerald-50 shadow-card"
           style={{ "--stagger": 3 } as React.CSSProperties}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={post.image} alt={post.title ?? "Cover"} className="block w-full" />
+          <img src={post.image} alt={post.title ?? "Cover"} className="w-full" />
         </div>
       )}
 
       {post.lookingFor && post.lookingFor.length > 0 && (
         <aside
-          className="reveal shadow-hard mt-8 border-2 border-forest bg-lime p-5"
+          className="reveal mt-8 rounded-2xl border border-emerald-600/30 bg-emerald-50/60 p-5"
           style={{ "--stagger": 4 } as React.CSSProperties}
         >
-          <p className="font-mono text-[11px] font-semibold tracking-[0.25em] text-forest uppercase">
-            ✚ This founder is looking for
+          <p className="flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-emerald-800 uppercase">
+            <Users className="size-4" />
+            This founder is looking for
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             {post.lookingFor.map((role) => (
               <span
                 key={role}
-                className="border-2 border-forest bg-cream px-3 py-1 font-mono text-[11px] font-semibold tracking-wider text-forest uppercase"
+                className="rounded-full bg-emerald-600 px-3 py-1 font-mono text-[11px] text-white"
               >
                 {role}
               </span>
             ))}
           </div>
           {post.author?.username && (
-            <p className="mt-4 text-sm text-forest">
+            <p className="mt-4 text-sm text-slate-600">
               Interested?{" "}
               <a
                 href={`https://github.com/${post.author.username}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold underline decoration-2 underline-offset-4"
+                className="link-underline font-medium text-emerald-800"
               >
                 Reach out to @{post.author.username} →
               </a>
@@ -166,16 +171,17 @@ const StartupPage = async ({
         className="reveal mt-10"
         style={{ "--stagger": 5 } as React.CSSProperties}
       >
-        <h2 className="font-display border-b-2 border-forest pb-2 text-2xl tracking-wide text-forest uppercase">
+        <p className="mb-4 flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-slate-400 uppercase">
+          <span aria-hidden className="text-emerald-600">✳</span>
           The pitch
-        </h2>
+        </p>
         {parsedContent ? (
           <div
-            className="prose mt-6 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-forest prose-p:text-forest/80 prose-strong:text-forest prose-a:font-semibold prose-a:text-meadow prose-li:text-forest/80"
+            className="prose prose-slate max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-emerald-700"
             dangerouslySetInnerHTML={{ __html: parsedContent }}
           />
         ) : (
-          <p className="mt-6 font-mono text-sm text-forest/50">
+          <p className="font-mono text-sm text-slate-400">
             No details filed yet.
           </p>
         )}

@@ -11,19 +11,6 @@ import type { StartupItem } from "@/lib/types";
 const isSortValue = (value: string | undefined): value is SortValue =>
   SORT_OPTIONS.some((option) => option.value === value);
 
-const MARQUEE_ITEMS = [
-  "Gründbar",
-  "pitch",
-  "upvote",
-  "team up",
-  "AI",
-  "Climate",
-  "Fintech",
-  "SaaS",
-  "Developer Tools",
-  "found it",
-];
-
 interface Stats {
   pitches: number;
   founders: number;
@@ -85,104 +72,84 @@ export default async function Home({
   return (
     <>
       <section className="container-page">
-        <p
-          className="reveal font-mono text-[11px] font-semibold tracking-[0.25em] text-meadow uppercase"
-          style={{ "--stagger": 0 } as React.CSSProperties}
-        >
-          Das Ideenregister — the startup idea registry
-        </p>
+        <div className="max-w-2xl">
+          <p
+            className="reveal mb-5 flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-emerald-700 uppercase"
+            style={{ "--stagger": 0 } as React.CSSProperties}
+          >
+            <span aria-hidden className="text-sm leading-none">✳</span>
+            Das Ideenregister — the startup idea registry
+          </p>
 
-        <h1
-          className="reveal font-display mt-4 text-5xl leading-[0.95] tracking-wide text-forest uppercase sm:text-7xl md:text-8xl"
-          style={{ "--stagger": 1 } as React.CSSProperties}
-        >
-          Pitch your{" "}
-          <span className="inline-block bg-lime px-2 sm:px-3">idea.</span>
-          <br />
-          Find your people.
-        </h1>
+          <h1
+            className="reveal text-4xl font-bold tracking-tight text-ink md:text-5xl"
+            style={{ "--stagger": 1 } as React.CSSProperties}
+          >
+            Pitch your <span className="mark">idea.</span>
+            <br />
+            Find your people.
+          </h1>
 
-        <p
-          className="reveal mt-6 max-w-xl text-base text-forest/70 md:text-lg"
-          style={{ "--stagger": 2 } as React.CSSProperties}
-        >
-          Good ideas are <em className="not-italic underline decoration-lime decoration-4 underline-offset-2">gründbar</em> — foundable.
-          Write the pitch, collect upvotes, and flag the teammates you need.
-        </p>
+          <p
+            className="reveal mt-4 text-lg text-slate-600"
+            style={{ "--stagger": 2 } as React.CSSProperties}
+          >
+            Good ideas are gründbar — <span className="mark">foundable</span>.
+            Write the pitch, collect upvotes, and flag the teammates you need.
+          </p>
+
+          <div
+            className="reveal mt-8 flex flex-wrap items-center gap-x-8 gap-y-5"
+            style={{ "--stagger": 3 } as React.CSSProperties}
+          >
+            <SearchForm query={query} />
+
+            {stats && (
+              <dl className="flex gap-6">
+                {(
+                  [
+                    [stats.pitches, "pitches"],
+                    [stats.founders, "founders"],
+                    [stats.upvotes, "upvotes"],
+                  ] as const
+                ).map(([value, label]) => (
+                  <div key={label} className="flex flex-col">
+                    <dd className="text-xl font-bold tracking-tight text-emerald-800 tabular-nums">
+                      {value}
+                    </dd>
+                    <dt className="font-mono text-[10px] tracking-widest text-slate-400 uppercase">
+                      {label}
+                    </dt>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </div>
+        </div>
 
         <div
-          className="reveal mt-8 flex flex-wrap items-center gap-6"
-          style={{ "--stagger": 3 } as React.CSSProperties}
+          className="reveal mt-10"
+          style={{ "--stagger": 4 } as React.CSSProperties}
         >
-          <SearchForm query={query} />
-
-          {stats && (
-            <div className="flex font-mono text-xs">
-              {(
-                [
-                  [stats.pitches, "pitches"],
-                  [stats.founders, "founders"],
-                  [stats.upvotes, "upvotes"],
-                ] as const
-              ).map(([value, label], i) => (
-                <div
-                  key={label}
-                  className={`flex flex-col border-2 border-forest bg-card px-4 py-2 ${i > 0 ? "border-l-0" : ""}`}
-                >
-                  <span className="font-display text-xl text-forest">
-                    {value}
-                  </span>
-                  <span className="text-[10px] tracking-widest text-forest/60 uppercase">
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
+          <FilterBar filters={filters} />
         </div>
       </section>
 
-      <div
-        className="reveal mt-12 overflow-hidden border-y-2 border-forest bg-forest py-2"
-        style={{ "--stagger": 4 } as React.CSSProperties}
-        aria-hidden
-      >
-        <div className="marquee-track flex w-max">
-          {[0, 1].map((copy) => (
-            <div key={copy} className="flex shrink-0">
-              {MARQUEE_ITEMS.map((item) => (
-                <span
-                  key={`${copy}-${item}`}
-                  className="font-display px-6 text-lg tracking-widest whitespace-nowrap text-lime uppercase"
-                >
-                  {item} <span className="text-cream">✺</span>
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-
       <section className="container-page mt-10">
-        <FilterBar filters={filters} />
-
-        <div className="mt-8 flex items-baseline justify-between border-b-2 border-forest pb-2">
-          <h2 className="font-display text-2xl tracking-wide text-forest uppercase">
-            {query
-              ? `Results: “${query}”`
-              : category
-                ? category
-                : filters.team
-                  ? "Looking for teammates"
-                  : "The register"}
-          </h2>
-          <span className="font-mono text-xs text-forest/60">
-            {posts.length} {posts.length === 1 ? "entry" : "entries"}
-          </span>
-        </div>
+        <p className="mb-5 flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-slate-400 uppercase">
+          <span aria-hidden className="text-emerald-600">✳</span>
+          {query
+            ? `Results for “${query}”`
+            : category
+              ? `${category} pitches`
+              : filters.team
+                ? "Founders looking for teammates"
+                : "The register"}
+          {posts.length > 0 && ` — ${posts.length}`}
+        </p>
 
         {posts.length > 0 ? (
-          <ul className="mt-8 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, i) => (
               <StartupCard
                 key={post._id}
@@ -193,33 +160,31 @@ export default async function Home({
             ))}
           </ul>
         ) : (
-          <div className="shadow-hard mt-8 border-2 border-forest bg-card px-6 py-16 text-center">
+          <div className="rounded-2xl border border-dashed border-emerald-950/15 px-6 py-16 text-center">
             {!isSanityConfigured || backendDown ? (
               <>
-                <p className="font-display text-2xl text-forest uppercase">
-                  Backend not connected
+                <p className="text-lg font-medium text-ink">
+                  Content backend not connected
                 </p>
-                <p className="mt-2 font-mono text-xs text-forest/60">
-                  Set the Sanity env vars (see README) and the register comes
-                  alive.
+                <p className="mt-1 text-sm text-slate-500">
+                  Set the Sanity environment variables (see README) and the
+                  register comes alive.
                 </p>
               </>
             ) : hasActiveFilters ? (
               <>
-                <p className="font-display text-2xl text-forest uppercase">
-                  Nothing filed here
-                </p>
-                <p className="mt-2 font-mono text-xs text-forest/60">
+                <p className="text-lg font-medium text-ink">Nothing here yet</p>
+                <p className="mt-1 text-sm text-slate-500">
                   No pitches match those filters — try broadening them.
                 </p>
               </>
             ) : (
               <>
-                <p className="font-display text-2xl text-forest uppercase">
-                  The register is empty
+                <p className="text-lg font-medium text-ink">
+                  No pitches yet — yours could be the first
                 </p>
-                <p className="mt-2 font-mono text-xs text-forest/60">
-                  Sign in and file the first pitch.
+                <p className="mt-1 text-sm text-slate-500">
+                  Sign in and start a pitch.
                 </p>
               </>
             )}

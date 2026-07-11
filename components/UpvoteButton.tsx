@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { ArrowBigUp } from "lucide-react";
 import { clsx } from "clsx";
 
 import { toggleUpvote } from "@/lib/actions";
@@ -53,27 +54,32 @@ const UpvoteButton = ({
   };
 
   return (
-    <div className="flex flex-col items-end gap-1.5">
+    <div className="flex flex-col items-end gap-1">
       <button
         type="button"
         onClick={onClick}
         disabled={isPending}
         aria-pressed={hasUpvoted}
         className={clsx(
-          "hover-lift shadow-hard flex cursor-pointer items-center gap-2 border-2 border-forest px-5 py-2.5 font-mono text-sm font-semibold uppercase tracking-wide",
-          hasUpvoted ? "bg-forest text-lime" : "bg-lime text-forest"
+          "flex cursor-pointer items-center gap-1.5 rounded-lg border px-4 py-2 font-mono text-xs transition-all duration-300",
+          hasUpvoted
+            ? "border-emerald-600 bg-emerald-600 text-white shadow-card"
+            : "border-emerald-950/15 bg-white text-slate-600 hover:border-emerald-600 hover:text-emerald-700 hover:shadow-card"
         )}
       >
-        <span className={clsx("transition-transform", hasUpvoted && "-translate-y-0.5")}>
-          ▲
-        </span>
+        <ArrowBigUp
+          className={clsx(
+            "size-4 transition-transform duration-300",
+            hasUpvoted && "-translate-y-0.5 fill-current"
+          )}
+        />
         {upvotes}
         <span className="hidden sm:inline">
           {hasUpvoted ? "upvoted" : "upvote"}
         </span>
       </button>
       {hint && (
-        <p className="font-mono text-[10px] text-forest/50">{hint}</p>
+        <p className="font-mono text-[10px] text-slate-400">{hint}</p>
       )}
     </div>
   );
