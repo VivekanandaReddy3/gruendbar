@@ -87,7 +87,7 @@ const FounderPage = async ({
 
       {founder.bio && (
         <p
-          className="reveal mt-6 max-w-2xl border-l-[3px] border-lime-300 pl-4 text-slate-600"
+          className="reveal mt-6 max-w-2xl font-serif text-lg text-slate-500 italic"
           style={{ "--stagger": 1 } as React.CSSProperties}
         >
           {founder.bio}
@@ -105,26 +105,21 @@ const FounderPage = async ({
         {startups.length > 0 ? (
           <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {startups.map((post, i) => (
-              <StartupCard
-                key={post._id}
-                post={post}
-                index={i}
-                stagger={Math.min(i, 8)}
-              />
+              <StartupCard key={post._id} post={post} stagger={Math.min(i, 8)} />
             ))}
           </ul>
         ) : (
           <div className="rounded-2xl border border-dashed border-emerald-950/15 px-6 py-14 text-center">
             <p className="text-lg font-medium text-ink">No pitches yet</p>
             {isOwnProfile ? (
-              <p className="mt-1 text-sm">
-                <Link href="/create" className="link-underline font-medium text-emerald-800">
-                  Start your first pitch →
+              <p className="mt-1 font-serif text-base text-slate-500 italic">
+                <Link href="/create" className="link-underline text-emerald-800">
+                  start your first pitch →
                 </Link>
               </p>
             ) : (
-              <p className="mt-1 text-sm text-slate-500">
-                Nothing published yet.
+              <p className="mt-1 font-serif text-base text-slate-500 italic">
+                nothing published yet.
               </p>
             )}
           </div>

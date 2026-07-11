@@ -21,7 +21,7 @@ const Navbar = async () => {
             <>
               <Link
                 href="/create"
-                className="rounded-lg bg-ink px-5 py-2 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover"
+                className="rounded-full bg-ink px-5 py-2 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover"
               >
                 Start a pitch
               </Link>
@@ -71,7 +71,7 @@ const Navbar = async () => {
             >
               <button
                 type="submit"
-                className="cursor-pointer rounded-lg bg-ink px-5 py-2 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover"
+                className="cursor-pointer rounded-full bg-ink px-5 py-2 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover"
               >
                 Sign in with GitHub
               </button>

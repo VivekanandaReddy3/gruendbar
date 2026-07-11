@@ -10,6 +10,7 @@
   --color-paper: var(--paper);
   --color-ink: var(--ink);
   --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
   --font-mono:
     var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -74,12 +75,6 @@
 .link-underline:hover,
 .link-underline[data-active="true"] {
   background-size: 100% 1px;
-}
-
-/* Gründbar's signature: a lime marker stroke behind key words. */
-.mark {
-  background: linear-gradient(transparent 52%, #d9f99d 52%, #d9f99d 92%, transparent 92%);
-  padding-inline: 0.08em;
 }
 
 @media (prefers-reduced-motion: reduce) {

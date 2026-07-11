@@ -137,8 +137,8 @@ const PitchForm = () => {
             </label>
           ))}
         </div>
-        <p className="mt-2 font-mono text-[11px] text-slate-400">
-          Optional — pitches looking for teammates get a badge and a filter.
+        <p className="mt-2 font-serif text-sm text-slate-400 italic">
+          optional — pitches looking for teammates get a badge and a filter.
         </p>
       </fieldset>
 
@@ -202,7 +202,7 @@ const PitchForm = () => {
       <button
         type="submit"
         disabled={isPending}
-        className="cursor-pointer self-start rounded-lg bg-ink px-8 py-3 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover disabled:opacity-60"
+        className="cursor-pointer self-start rounded-full bg-ink px-8 py-3 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover disabled:opacity-60"
       >
         {isPending ? "Publishing…" : "Publish pitch →"}
       </button>

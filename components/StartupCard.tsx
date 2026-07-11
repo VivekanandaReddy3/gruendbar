@@ -7,11 +7,9 @@ import type { StartupItem } from "@/lib/types";
 
 const StartupCard = ({
   post,
-  index = 0,
   stagger = 0,
 }: {
   post: StartupItem;
-  index?: number;
   stagger?: number;
 }) => {
   const {
@@ -44,11 +42,8 @@ const StartupCard = ({
             className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
           />
         )}
-        <span className="absolute top-2 left-2 rounded-md bg-white/90 px-2 py-0.5 font-mono text-[10px] font-medium text-emerald-900 backdrop-blur-sm">
-          № {String(index + 1).padStart(2, "0")}
-        </span>
         {lookingFor && lookingFor.length > 0 && (
-          <span className="absolute right-2 bottom-2 flex items-center gap-1 rounded-md bg-emerald-700/95 px-2.5 py-1 font-mono text-[10px] tracking-wide text-white">
+          <span className="absolute top-2 left-2 flex items-center gap-1 rounded-full bg-emerald-600/95 px-2.5 py-1 font-mono text-[10px] tracking-wide text-white">
             <Users className="size-3" />
             team-up
           </span>

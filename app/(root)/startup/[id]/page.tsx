@@ -75,7 +75,7 @@ const StartupPage = async ({
           {post.title}
         </h1>
         {post.description && (
-          <p className="mt-4 border-l-[3px] border-lime-300 pl-4 text-lg text-slate-600 md:text-xl">
+          <p className="mt-3 font-serif text-xl text-slate-500 italic md:text-2xl">
             {post.description}
           </p>
         )}
@@ -171,8 +171,7 @@ const StartupPage = async ({
         className="reveal mt-10"
         style={{ "--stagger": 5 } as React.CSSProperties}
       >
-        <p className="mb-4 flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] text-slate-400 uppercase">
-          <span aria-hidden className="text-emerald-600">✳</span>
+        <p className="mb-4 font-mono text-[11px] tracking-[0.2em] text-slate-400 uppercase">
           The pitch
         </p>
         {parsedContent ? (
@@ -181,8 +180,8 @@ const StartupPage = async ({
             dangerouslySetInnerHTML={{ __html: parsedContent }}
           />
         ) : (
-          <p className="font-mono text-sm text-slate-400">
-            No details filed yet.
+          <p className="font-serif text-slate-500 italic">
+            no details provided yet.
           </p>
         )}
       </div>

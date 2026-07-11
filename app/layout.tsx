@@ -1,11 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Schibsted_Grotesk } from "next/font/google";
+import { JetBrains_Mono, Newsreader, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const grotesk = Schibsted_Grotesk({
   display: "swap",
   subsets: ["latin"],
   variable: "--font-grotesk",
+});
+
+const newsreader = Newsreader({
+  display: "swap",
+  style: "italic",
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  variable: "--font-newsreader",
 });
 
 const jetbrains = JetBrains_Mono({
@@ -35,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${grotesk.variable} ${jetbrains.variable} flex min-h-screen flex-col`}
+        className={`${grotesk.variable} ${newsreader.variable} ${jetbrains.variable} flex min-h-screen flex-col`}
       >
         {children}
       </body>

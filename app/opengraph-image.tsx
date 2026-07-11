@@ -5,15 +5,15 @@ export const alt = "Gründbar — pitch your idea, find your people";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const GROTESK_TEXT =
-  "Pitch your idea. Find your people. gründbar.";
-const MONO_TEXT =
-  "✳ THE STARTUP IDEA REGISTRY good ideas are foundable a project by vivekreddy.de";
+const TITLE = "Pitch your idea. Find your people.";
+const TAGLINE = "because good ideas are gründbar — foundable.";
+const MONO = "gründbar. THE STARTUP IDEA DIRECTORY a project by vivekreddy.de";
 
 export default async function Image() {
-  const [grotesk, mono] = await Promise.all([
-    loadGoogleFont("Schibsted+Grotesk:wght@700", GROTESK_TEXT),
-    loadGoogleFont("JetBrains+Mono:wght@500", MONO_TEXT),
+  const [grotesk, serif, mono] = await Promise.all([
+    loadGoogleFont("Schibsted+Grotesk:wght@700", TITLE + "gründbar."),
+    loadGoogleFont("Newsreader:ital,wght@1,500", TAGLINE),
+    loadGoogleFont("JetBrains+Mono:wght@500", MONO),
   ]);
 
   return new ImageResponse(
@@ -39,8 +39,8 @@ export default async function Image() {
           <div
             style={{
               fontFamily: "Grotesk",
-              fontSize: 36,
-              color: "#101613",
+              fontSize: 34,
+              color: "#10160f",
               display: "flex",
             }}
           >
@@ -50,43 +50,49 @@ export default async function Image() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 12,
+              gap: 14,
               fontFamily: "JetBrains Mono",
               fontSize: 19,
               letterSpacing: 4,
               color: "#64748b",
             }}
           >
-            <span style={{ color: "#059669", fontSize: 24 }}>✳</span>
-            THE STARTUP IDEA REGISTRY
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                borderRadius: 9999,
+                background: "#10b981",
+              }}
+            />
+            THE STARTUP IDEA DIRECTORY
           </div>
         </div>
 
-        <div
-          style={{
-            fontFamily: "Grotesk",
-            fontSize: 88,
-            letterSpacing: -3,
-            color: "#101613",
-            lineHeight: 1.08,
-            display: "flex",
-            flexDirection: "column",
-            maxWidth: 950,
-          }}
-        >
-          <div style={{ display: "flex" }}>
-            Pitch your&nbsp;
-            <span
-              style={{
-                backgroundImage:
-                  "linear-gradient(transparent 52%, #d9f99d 52%, #d9f99d 92%, transparent 92%)",
-                padding: "0 6px",
-              }}
-            >
-              idea.
-            </span>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              fontFamily: "Grotesk",
+              fontSize: 84,
+              letterSpacing: -3,
+              color: "#10160f",
+              lineHeight: 1.05,
+              maxWidth: 950,
+            }}
+          >
+            {TITLE}
           </div>
-          <div>Find your people.</div>
+          <div
+            style={{
+              fontFamily: "Newsreader",
+              fontStyle: "italic",
+              fontSize: 38,
+              color: "#64748b",
+              marginTop: 18,
+            }}
+          >
+            {TAGLINE}
+          </div>
         </div>
 
         <div
@@ -98,8 +104,8 @@ export default async function Image() {
             color: "#94a3b8",
           }}
         >
-          <div>good ideas are foundable</div>
           <div>a project by vivekreddy.de</div>
+          <div style={{ color: "#059669" }}>gründbar.</div>
         </div>
       </div>
     ),
@@ -107,6 +113,7 @@ export default async function Image() {
       ...size,
       fonts: [
         { name: "Grotesk", data: grotesk, weight: 700, style: "normal" },
+        { name: "Newsreader", data: serif, weight: 500, style: "italic" },
         { name: "JetBrains Mono", data: mono, weight: 500, style: "normal" },
       ],
     }

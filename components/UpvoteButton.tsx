@@ -61,7 +61,7 @@ const UpvoteButton = ({
         disabled={isPending}
         aria-pressed={hasUpvoted}
         className={clsx(
-          "flex cursor-pointer items-center gap-1.5 rounded-lg border px-4 py-2 font-mono text-xs transition-all duration-300",
+          "flex cursor-pointer items-center gap-1.5 rounded-full border px-4 py-2 font-mono text-xs transition-all duration-300",
           hasUpvoted
             ? "border-emerald-600 bg-emerald-600 text-white shadow-card"
             : "border-emerald-950/15 bg-white text-slate-600 hover:border-emerald-600 hover:text-emerald-700 hover:shadow-card"

@@ -22,14 +22,11 @@ export default async function CreatePage() {
         className="reveal text-4xl font-bold tracking-tight text-ink"
         style={{ "--stagger": 1 } as React.CSSProperties}
       >
-        Start a <span className="mark">pitch.</span>
+        Start a pitch.
+        <span className="mt-2 block font-serif text-2xl font-normal tracking-normal text-slate-500 italic">
+          one idea, one page, one team.
+        </span>
       </h1>
-      <p
-        className="reveal mt-3 text-lg text-slate-600"
-        style={{ "--stagger": 1 } as React.CSSProperties}
-      >
-        One idea, one page, one team.
-      </p>
 
       {session ? (
         <div
@@ -46,8 +43,8 @@ export default async function CreatePage() {
           <p className="text-lg font-medium text-ink">
             Pitching needs a founder behind it
           </p>
-          <p className="mt-1 text-sm text-slate-500">
-            Sign in with GitHub — your profile becomes your founder page.
+          <p className="mt-1 font-serif text-base text-slate-500 italic">
+            sign in with GitHub and your profile becomes your founder page.
           </p>
           <form
             action={async () => {
@@ -58,7 +55,7 @@ export default async function CreatePage() {
           >
             <button
               type="submit"
-              className="cursor-pointer rounded-lg bg-ink px-6 py-2.5 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover"
+              className="cursor-pointer rounded-full bg-ink px-6 py-2.5 font-mono text-xs text-paper transition-all duration-300 hover:bg-emerald-900 hover:shadow-card-hover"
             >
               Sign in with GitHub
             </button>
