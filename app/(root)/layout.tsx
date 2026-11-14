@@ -6,6 +6,17 @@ export default function Layout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
+      <div
+        role="note"
+        className="border-b border-amber-300/60 bg-amber-50 px-4 py-2 text-center font-mono text-xs leading-relaxed text-amber-900"
+      >
+        <span className="mr-2 rounded-full bg-amber-200 px-2 py-0.5 font-semibold tracking-wide uppercase">
+          Demo data
+        </span>
+        The seeded founders (Max Mustermann &amp; co.) and their pitches are
+        invented examples, and the cover photos are random placeholders. Sign
+        in with GitHub to post a real idea.
+      </div>
       <Navbar />
       <main className="flex-1 pt-10 pb-20 md:pt-14">{children}</main>
       <footer className="container-page pb-8">
